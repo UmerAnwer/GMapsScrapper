@@ -94,7 +94,7 @@ if fieldValues is None:
     exit(0)
 
 # Processing input and sending it to the scrapper function
-folder_name = fieldValues[0].lower()
+folder_name = "XLS\\" + fieldValues[0].lower()
 lifestyle_indicator = sub(r"\s+", '+', fieldValues[1].lower())
 places = fieldValues[2]
 print "Connecting To Google Maps..."
