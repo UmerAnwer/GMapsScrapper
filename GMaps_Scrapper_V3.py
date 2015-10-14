@@ -15,7 +15,7 @@ from os import path, makedirs
 # @rtype: None
 
 
-def scrapper_recursion():
+def recursive_scrapper():
     if chrome.is_element_present_by_xpath(
             "//div[contains(@class,'widget-pane-section-listbox widget-pane-section-scrollbox "
             "widget-pane-scrollable')]"):
@@ -44,7 +44,9 @@ def scrapper_recursion():
                 chrome.find_by_xpath("//a[contains(@class, 'widget-pane-section-back-to-list-link noprint')]").click()
             except:
                 continue
-        next_button = chrome.find_by_xpath('//button[@jsaction="pane.paginationSection.nextPage"]')
+        next_button = chrome.find_by_xpath('//button[@jsaction="pane.paginationSection.nextPage"]') \
+            if chrome.is_element_present_by_xpath('//button[@jsaction="pane.paginationSection.nextPage"]') \
+            else {"disabled": "false"}
         if next_button["disabled"] == "true":
             file_handler.close()
         else:
@@ -58,7 +60,7 @@ def scrapper_recursion():
                             "'widget-zoom-button widget-zoom-in widget-zoom-button-disabled')]"):
                         break
                     chrome.find_by_xpath("//button[contains(@class, 'widget-zoom-button widget-zoom-in')]").click()
-                scrapper_recursion()
+                recursive_scrapper()
             except:
                 file_handler.close()
     else:
@@ -106,7 +108,7 @@ for place in places_arr:
     file_handler = open(folder_name + "/" + lifestyle_indicator + "/" + place.strip() + "_" +
                         lifestyle_indicator.strip() + ".xls", "w")
     file_handler.write("Name\tCategory\tAddress\tLatitude\tLongitude\n")
-    scrapper_recursion()
+    recursive_scrapper()
 
 print "Successfully Scrapped All Available Data!"
 print "Disconnecting Google Maps..."
