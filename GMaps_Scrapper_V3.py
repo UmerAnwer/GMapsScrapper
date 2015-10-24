@@ -17,8 +17,8 @@ from os import path, makedirs
 
 def recursive_scrapper():
     if chrome.is_element_present_by_xpath(
-            "//div[contains(@class,'widget-pane-section-listbox widget-pane-section-scrollbox "
-            "widget-pane-scrollable')]"):
+            "//div[contains(@class,'widget-pane-section-listbox widget-pane-section-scrollbox scrollable-y "
+            "scrollable-show')]"):
         div_count = len(chrome.find_by_xpath("//div[contains(@jsaction, 'pane.resultSection.click;"
                                              "keydown:pane.resultSection.keydown;mouseover:pane.resultSection.in;"
                                              "mouseout:pane.resultSection.out;focus:pane.resultSection.focusin;"
@@ -32,7 +32,6 @@ def recursive_scrapper():
                                      "blur:pane.resultSection.focusout')]")[count].click()
                 sleep(2)
                 name = chrome.find_by_id("widget-pane-section-header-title").text
-                print name
                 address = chrome.find_by_xpath("//div[contains(@class, 'widget-pane-section-info')]")[0].text
                 category = chrome.find_by_xpath("//a[contains(@jsaction, 'pane.rating.category')]").text
                 geocode_url = chrome.url.split("@")
@@ -97,6 +96,7 @@ print "Connecting To Google Maps..."
 places_arr = places.split("$")
 chrome = Browser("chrome")
 for place in places_arr:
+    print place
     place = sub(r"\s+", '+', place)
     chrome.visit("https://www.google.co.in/maps/search/" + lifestyle_indicator.strip() + "+in+" + place.strip() +
                  "/@13.0318799,80.1985061,21z")
