@@ -97,6 +97,7 @@ print "Connecting To Google Maps..."
 places_arr = places.split("$")
 chrome = Browser("chrome")
 for place in places_arr:
+    place = place.strip()
     print place
     place_in_link = sub(r"\s+", '+', place)
     chrome.visit("https://www.google.co.in/maps/search/" + lifestyle_indicator_in_link.strip() + "+in+" +
@@ -106,7 +107,7 @@ for place in places_arr:
         makedirs(folder_name)
     if not path.exists(folder_name + "/" + lifestyle_indicator):
         makedirs(folder_name + "/" + lifestyle_indicator)
-    file_handler = open(folder_name + "/" + lifestyle_indicator + "/" + place.strip() + "_" +
+    file_handler = open(folder_name + "/" + lifestyle_indicator + "/" + place + "_" +
                         lifestyle_indicator.strip() + ".xls", "w")
     file_handler.write("Name\tCategory\tAddress\tLatitude\tLongitude\n")
     recursive_scrapper()
