@@ -90,16 +90,17 @@ if fieldValues is None:
 
 # Processing input and sending it to the scrapper function
 folder_name = "XLS\\" + fieldValues[0].lower()
-lifestyle_indicator = sub(r"\s+", '+', fieldValues[1].lower())
+lifestyle_indicator = fieldValues[1].lower()
+lifestyle_indicator_in_link = sub(r"\s+", '+', lifestyle_indicator)
 places = fieldValues[2]
 print "Connecting To Google Maps..."
 places_arr = places.split("$")
 chrome = Browser("chrome")
 for place in places_arr:
     print place
-    place = sub(r"\s+", '+', place)
-    chrome.visit("https://www.google.co.in/maps/search/" + lifestyle_indicator.strip() + "+in+" + place.strip() +
-                 "/@13.0318799,80.1985061,21z")
+    place_in_link = sub(r"\s+", '+', place)
+    chrome.visit("https://www.google.co.in/maps/search/" + lifestyle_indicator_in_link.strip() + "+in+" +
+                 place_in_link.strip() + "/@13.0318799,80.1985061,21z")
     sleep(3)
     if not path.exists(folder_name):
         makedirs(folder_name)
