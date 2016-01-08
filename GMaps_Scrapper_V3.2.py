@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 # Author: Harish Mohan <harishprofile001@gmail.com>
 # Name: GMaps Scrapper
 # Version: 3.2
