@@ -39,7 +39,7 @@ def recursive_scrapper():
                 # get address
                 address = chrome.find_by_xpath("//div[contains(@class, 'widget-pane-section-info')]")[0].text
                 # get category
-                category = chrome.find_by_xpath("//a[contains(@jsaction, 'pane.rating.category')]").text
+                category = chrome.find_by_xpath("//button[contains(@jsaction, 'pane.rating.category')]").text
                 # get URL for extracting geocode
                 geocode_url = chrome.url.split("@")
                 geocode_arr = geocode_url[1].split(",")
